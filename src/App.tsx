@@ -3,6 +3,7 @@ import React, { Suspense, lazy } from 'react';
 import CoverImg from "./assets/hero/hero_cover.jpg";
 import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
+import Loading from './assets/loading.svg';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -26,10 +27,20 @@ const bgImage = {
  width: "100%",
  }; 
 
+ const loadingAnimation = {
+  backgroundImage: `url(${Loading})`,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundRepeat: "no-repeat",
+  height: "100%",
+  width: "100%"
+ };
+
 const App: React.FC = () => {
   return (
     <>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div style={loadingAnimation}></div>}>
     <div style={bgImage}>
     <Navbar />
       <div className="flex flex-row">
