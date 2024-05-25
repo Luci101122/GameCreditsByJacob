@@ -2,6 +2,7 @@
 import React, { Suspense, lazy } from 'react';
 import CoverImg from "./assets/hero/hero_cover.jpg";
 import { Routes, Route } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -17,39 +18,40 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const SignUpPage = lazy(() => import('./pages/SignupPage'));
 
 const bgImage = {
-  backgroundImage: `url(${CoverImg})`,
+ backgroundImage: `url(${CoverImg})`,
  backgroundSize: "cover",
  backgroundPosition: "center",
  backgroundRepeat: "no-repeat",
-  height: "100%",
+ height: "100%",
  width: "100%",
  }; 
 
 const App: React.FC = () => {
   return (
     <>
-    
-    <div style={bgImage} className="flex">
-    
-      <div className="flex-1 flex flex-col">
-        <Navbar />
-        <Hero />
-        <div className="flex-1 p-4">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/watch" element={<WatchPage />} />
-              <Route path="/events" element={<EventsPage />} />
-              <Route path="/store" element={<StorePage />} />
-              <Route path="/support" element={<SupportPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-            </Routes>
-          </Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
+    <div style={bgImage}>
+    <Navbar />
+      <div className="flex flex-row">
+        <div className="flex-col z-40">
+        <Sidebar />
         </div>
+      <div className="flex-row flex flex-grow">
+            <Routes>
+              <Route path="/GameCreditsByJacob/" element={<Hero />} />
+              <Route path="/GameCreditsByJacob/home" element={<HomePage />} />
+              <Route path="/GameCreditsByJacob/watch" element={<WatchPage />} />
+              <Route path="/GameCreditsByJacob/events" element={<EventsPage />} />
+              <Route path="/GameCreditsByJacob/store" element={<StorePage />} />
+              <Route path="/GameCreditsByJacob/support" element={<SupportPage />} />
+              <Route path="/GameCreditsByJacob/login" element={<LoginPage />} />
+              <Route path="/GameCreditsByJacob/signup" element={<SignUpPage />} />
+              <Route path="/GameCreditsByJacob/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+            </Routes>
+      </div>
       </div>
     </div>
+    </Suspense>
     </>
   );
 };
