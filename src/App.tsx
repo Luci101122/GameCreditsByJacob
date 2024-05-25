@@ -1,9 +1,11 @@
 // src/App.tsx
-import React, { Suspense, lazy } from 'react';
+import React, {useState, useEffect, Suspense, lazy } from 'react';
 import CoverImg from "./assets/hero/hero_cover.jpg";
 import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import Loading from './assets/loading.svg';
+import RingLoader from "react-spinners/RingLoader";
+import './App.css';
+
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -27,27 +29,35 @@ const bgImage = {
  width: "100%",
  }; 
 
- const loadingAnimation = {
-  backgroundImage: `url(${Loading})`,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundRepeat: "no-repeat",
-  height: "100%",
-  width: "100%"
- };
 
-const App: React.FC = () => {
+function App(){
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 8000);
+  },[])
   return (
-    <>
-    <Suspense fallback={<div style={loadingAnimation}></div>}>
-    <div style={bgImage}>
+    <div className="App">
+
+  
+      {loading?
+      <RingLoader
+        color={'#D00210'}
+        loading={loading}
+        size={30}
+      />
+  :
+      <div style={bgImage}>
     <Navbar />
       <div className="flex flex-row">
         <div className="flex-col z-40">
         <Sidebar />
         </div>
-      <div className="flex-row flex flex-grow">
+        <div className="flex-row flex flex-grow">
+          <Suspense fallback={loading}>
             <Routes>
               <Route path="/GameCreditsByJacob/" element={<Hero />} />
               <Route path="/GameCreditsByJacob/home" element={<HomePage />} />
@@ -59,11 +69,13 @@ const App: React.FC = () => {
               <Route path="/GameCreditsByJacob/signup" element={<SignUpPage />} />
               <Route path="/GameCreditsByJacob/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             </Routes>
+            </Suspense>
+          </div>
       </div>
       </div>
+      
+    }
     </div>
-    </Suspense>
-    </>
   );
 };
 
