@@ -5,7 +5,7 @@ const Hero = () => {
 
   return (
     <>
-      <div className="relative min-h-[400px] sm:min-h-[500px] md:min-h-[550px] lg:min-h-[600px]"> 
+      <div className="relative min-h-[400px] sm:min-h-[500px] md:min-h-[550px] lg:min-h-[600px] w-full"> 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black from-50% to-transparent"></div>        
         <div className="relative z-10 flex items-center min-h-[400px] sm:min-h-[500px] md:min-h-[550px] lg:min-h-[600px]">

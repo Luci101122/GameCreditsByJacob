@@ -44,14 +44,14 @@ function App(){
 
   
       {loading?
-      <div className="flex flex-col gap-4">
+
       <RingLoader
         color={'#D00210'}
         loading={loading}
         size={70}
       />
-      <div className="font-sans text-neutral-200">Loading</div>
-      </div>
+
+
   :
       <div style={bgImage}>
     <Navbar />
